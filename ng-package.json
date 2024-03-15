@@ -2,7 +2,8 @@
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "dest": "./dist",
   "assets": [
-    "./styles/archwizard.scss"
+    "./styles/archwizard.scss",
+    "./styles/archwizard.css"
   ],
   "lib": {
     "entryFile": "src/index.ts"
