@@ -11,6 +11,9 @@ This project contains a functional module with a wizard component and some suppo
 ## Build
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Publish
+Run `cd dist` & `npm pack` and upload the created `.tgz` file to the package server.
+
 ## Running unit tests
 Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
@@ -26,6 +29,8 @@ The following table shows which version of `angular-archwizard` has been built w
 | `5.0.1`                      | Angular 8       |
 | `6.1.0`                      | Angular 9       |
 | `7.0.0`                      | Angular 11      |
+| `17.0.0`                     | Angular 17      |
+| `18.0.0`                     | Angular 18      |
 
 ## Gitpod
 `angular-archwizard` can be developed with Gitpod, a free one-click online IDE for GitHub:
