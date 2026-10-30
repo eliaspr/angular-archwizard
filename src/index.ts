@@ -32,6 +32,3 @@ export {StepIndex, isStepIndex} from './lib/util/step-index.interface';
 export {StepOffset, isStepOffset} from './lib/util/step-offset.interface';
 export {WizardCompletionStep} from './lib/util/wizard-completion-step.interface';
 export {WizardStep} from './lib/util/wizard-step.interface';
-
-// export the module
-export {ArchwizardModule} from './lib/archwizard.module';

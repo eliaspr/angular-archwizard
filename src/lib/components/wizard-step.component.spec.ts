@@ -1,18 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { MovingDirection } from '../util/moving-direction.enum';
 import { WizardComponent } from './wizard.component';
+import {WizardStepComponent} from "./wizard-step.component";
+import {OptionalStepDirective} from "../directives/optional-step.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1' (stepEnter)="enterInto($event, 1)" (stepExit)="exitFrom($event, 1)">
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [canExit]="isValid" awOptionalStep (stepEnter)="enterInto($event, 2)"
+      <aw-wizard-step stepTitle='Steptitle 2' [canExit]="isValid" [awOptionalStep] (stepEnter)="enterInto($event, 2)"
                       (stepExit)="exitFrom($event, 2)">
         Step 2
       </aw-wizard-step>
@@ -20,7 +21,13 @@ import { WizardComponent } from './wizard.component';
         Step 3
       </aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardStepComponent,
+    WizardComponent,
+    OptionalStepDirective
+  ]
 })
 class WizardTestComponent {
 
@@ -48,9 +55,8 @@ describe('WizardStepComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { checkWizardNavigableSteps, checkWizardState } from '../util/test-utils';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {NavigationModeDirective} from "../directives/navigation-mode.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
-    <aw-wizard [awNavigationMode] navigateForward="visited">
+    selector: 'aw-test-wizard',
+    template: `
+    <aw-wizard [awNavigationMode]="null" navigateForward="visited">
       <aw-wizard-step stepTitle='Steptitle 1'>
         Step 1
       </aw-wizard-step>
@@ -18,7 +19,13 @@ import { checkWizardNavigableSteps, checkWizardState } from '../util/test-utils'
         Step 3
       </aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent,
+    NavigationModeDirective
+  ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
@@ -33,9 +40,8 @@ describe('Wizard navigation with navigateForward=visited', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

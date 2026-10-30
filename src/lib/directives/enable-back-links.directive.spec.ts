@@ -1,18 +1,21 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { MovingDirection } from '../util/moving-direction.enum';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {OptionalStepDirective} from "./optional-step.directive";
+import {WizardCompletionStepComponent} from "../components/wizard-completion-step.component";
+import {EnableBackLinksDirective} from "./enable-back-links.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1' (stepEnter)="enterInto($event, 1)" (stepExit)="exitFrom($event, 1)">
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [canExit]="isValid" awOptionalStep (stepEnter)="enterInto($event, 2)"
+      <aw-wizard-step stepTitle='Steptitle 2' [canExit]="isValid" [awOptionalStep] (stepEnter)="enterInto($event, 2)"
                       (stepExit)="exitFrom($event, 2)">
         Step 2
       </aw-wizard-step>
@@ -21,7 +24,15 @@ import { MovingDirection } from '../util/moving-direction.enum';
         Step 3
       </aw-wizard-completion-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardStepComponent,
+    WizardComponent,
+    OptionalStepDirective,
+    WizardCompletionStepComponent,
+    EnableBackLinksDirective
+  ]
 })
 class WizardTestComponent {
 
@@ -51,9 +62,8 @@ describe('EnableBackLinksDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

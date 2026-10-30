@@ -1,18 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { checkClasses } from '../util/test-utils';
 import { WizardComponent } from './wizard.component';
+import {WizardStepComponent} from "./wizard-step.component";
+import {OptionalStepDirective} from "../directives/optional-step.directive";
+import {WizardCompletionStepComponent} from "./wizard-completion-step.component";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1' [stepId]="firstStepId">
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' awOptionalStep>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
         Step 2
       </aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3'>
@@ -22,7 +24,14 @@ import { WizardComponent } from './wizard.component';
         Step 4
       </aw-wizard-completion-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardStepComponent,
+    WizardComponent,
+    OptionalStepDirective,
+    WizardCompletionStepComponent
+  ]
 })
 class WizardTestComponent {
   public firstStepId = 'step1';
@@ -39,9 +48,8 @@ describe('WizardNavigationBarComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

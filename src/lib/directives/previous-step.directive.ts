@@ -14,7 +14,8 @@ import {WizardComponent} from '../components/wizard.component';
  * @author Marc Arndt
  */
 @Directive({
-  selector: '[awPreviousStep]'
+    selector: '[awPreviousStep]',
+    standalone: true
 })
 export class PreviousStepDirective {
   /**

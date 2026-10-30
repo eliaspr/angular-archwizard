@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { checkWizardNavigableSteps, checkWizardState } from '../util/test-utils';
+import {WizardStepComponent} from "../components/wizard-step.component";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1'>
         Step 1
@@ -18,7 +18,12 @@ import { checkWizardNavigableSteps, checkWizardState } from '../util/test-utils'
         Step 3
       </aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent
+  ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
@@ -33,9 +38,8 @@ describe('Wizard navigation', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

@@ -39,7 +39,8 @@ import { WizardComponent } from '../components/wizard.component';
  * @author Marc Arndt
  */
 @Directive({
-  selector: '[awGoToStep]'
+    selector: '[awGoToStep]',
+    standalone: true
 })
 export class GoToStepDirective {
   /**

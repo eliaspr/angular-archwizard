@@ -1,13 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { checkWizardState } from '../util/test-utils';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {WizardStepTitleDirective} from "./wizard-step-title.directive";
+import {WizardCompletionStepComponent} from "../components/wizard-completion-step.component";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Not visible title'>
         <ng-template awStepTitle let-wizardStep="wizardStep">
@@ -28,7 +30,14 @@ import { checkWizardState } from '../util/test-utils';
         Step 3
       </aw-wizard-completion-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent,
+    WizardStepTitleDirective,
+    WizardCompletionStepComponent
+  ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
@@ -43,9 +52,8 @@ describe('WizardStepTitleDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

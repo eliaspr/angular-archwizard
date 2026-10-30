@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { GoToStepDirective } from './go-to-step.directive';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {OptionalStepDirective} from "./optional-step.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1' [canExit]="canExit">
         Step 1
@@ -21,12 +22,12 @@ import { GoToStepDirective } from './go-to-step.directive';
           Go to third step
         </button>
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' awOptionalStep>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
         Step 2
         <button type="button" [awGoToStep]="{stepIndex: 2}" (finalize)="finalizeStep(2)">
           Go to third step
         </button>
-        <button type="button" [awGoToStep]="{incorrectKey: 3}" (finalize)="finalizeStep(2)">
+        <button type="button" [awGoToStep]="$any({incorrectKey: 3})" (finalize)="finalizeStep(2)">
           Invalid Button
         </button>
       </aw-wizard-step>
@@ -37,7 +38,14 @@ import { GoToStepDirective } from './go-to-step.directive';
         </button>
       </aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardStepComponent,
+    WizardComponent,
+    GoToStepDirective,
+    OptionalStepDirective
+  ]
 })
 class WizardTestComponent {
 
@@ -63,9 +71,8 @@ describe('GoToStepDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

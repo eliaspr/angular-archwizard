@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { GoToStepDirective } from '../directives/go-to-step.directive';
 import { checkWizardState } from './test-utils';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {OptionalStepDirective} from "../directives/optional-step.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1' [canExit]="canExit">
         Step 1
@@ -16,7 +17,7 @@ import { checkWizardState } from './test-utils';
           Go to third step
         </button>
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' awOptionalStep>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
         Step 2
         <button type="button" [awGoToStep]="{stepIndex: 1}" (preFinalize)="finalizeStep(2)">
           Stay on second step
@@ -29,7 +30,14 @@ import { checkWizardState } from './test-utils';
         </button>
       </aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent,
+    GoToStepDirective,
+    OptionalStepDirective
+  ]
 })
 class WizardTestComponent {
 
@@ -53,9 +61,8 @@ describe('StepIndex', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

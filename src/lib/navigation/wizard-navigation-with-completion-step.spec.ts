@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { checkWizardState } from '../util/test-utils';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {WizardCompletionStepComponent} from "../components/wizard-completion-step.component";
+import {EnableBackLinksDirective} from "../directives/enable-back-links.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1'>
         Step 1
@@ -18,7 +20,14 @@ import { checkWizardState } from '../util/test-utils';
         Step 3
       </aw-wizard-completion-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent,
+    WizardCompletionStepComponent,
+    EnableBackLinksDirective
+  ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
@@ -33,9 +42,8 @@ describe('Wizard navigation with completion step', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

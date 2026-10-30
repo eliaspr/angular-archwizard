@@ -1,25 +1,31 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { OptionalStepDirective } from './optional-step.directive';
+import {WizardStepComponent} from "../components/wizard-step.component";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1'>
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' awOptionalStep>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
         Step 2
       </aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3' [awOptionalStep]="false">
         Step 3
       </aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent,
+    OptionalStepDirective
+  ]
 })
 class WizardTestComponent {
 
@@ -35,9 +41,8 @@ describe('OptionalStepDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

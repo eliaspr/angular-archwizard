@@ -1,26 +1,48 @@
 import { Component, forwardRef, Host, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { MovingDirection } from '../util/moving-direction.enum';
 import { WizardStepDirective } from './wizard-step.directive';
+import {OptionalStepDirective} from "./optional-step.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
+  selector: 'aw-test-wizard-step',
   template: `
+    Step 2
+  `,
+  standalone: true,
+  imports: []
+})
+class WizardStepTestComponent {
+  constructor(@Host() private wizardStep: WizardStepDirective, wizard: WizardTestComponent) {
+    wizardStep.stepEnter.emit = direction => wizard.enterInto(direction, 2);
+    wizardStep.stepExit.emit = direction => wizard.exitFrom(direction, 2);
+  }
+}
+
+@Component({
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <div awWizardStep stepTitle='Steptitle 1' (stepEnter)="enterInto($event, 1)" (stepExit)="exitFrom($event, 1)">
         Step 1
       </div>
-      <aw-test-wizard-step awWizardStep stepTitle='Steptitle 2' awOptionalStep>
+      <aw-test-wizard-step awWizardStep stepTitle='Steptitle 2' [awOptionalStep]>
         Step 2
       </aw-test-wizard-step>
       <div awWizardStep stepTitle='Steptitle 3' (stepEnter)="enterInto($event, 3)" (stepExit)="exitFrom($event, 3)">
         Step 3
       </div>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepDirective,
+    OptionalStepDirective,
+    WizardStepTestComponent
+  ]
 })
 class WizardTestComponent {
 
@@ -41,19 +63,6 @@ class WizardTestComponent {
   }
 }
 
-@Component({
-  selector: 'aw-test-wizard-step',
-  template: `
-    Step 2
-  `
-})
-class WizardStepTestComponent {
-  constructor(@Host() private wizardStep: WizardStepDirective, wizard: WizardTestComponent) {
-    wizardStep.stepEnter.emit = direction => wizard.enterInto(direction, 2);
-    wizardStep.stepExit.emit = direction => wizard.exitFrom(direction, 2);
-  }
-}
-
 describe('WizardStepDirective', () => {
   let wizardTestFixture: ComponentFixture<WizardTestComponent>;
 
@@ -62,9 +71,8 @@ describe('WizardStepDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent, WizardStepTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent, WizardStepTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {

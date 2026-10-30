@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
 import { BaseNavigationMode } from './base-navigation-mode.interface';
+import {WizardStepComponent} from "../components/wizard-step.component";
 
 class CustomNavigationMode extends BaseNavigationMode {
   public isNavigable(wizard: WizardComponent, destinationIndex: number): boolean {
@@ -11,14 +11,19 @@ class CustomNavigationMode extends BaseNavigationMode {
 }
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1'>Step 1</aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 2'>Step 2</aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent
+  ]
 })
 class WizardTestComponent {
 
@@ -27,14 +32,19 @@ class WizardTestComponent {
 }
 
 @Component({
-  selector: 'aw-wizard-with-custom-nav-mode',
-  template: `
+    selector: 'aw-wizard-with-custom-nav-mode',
+    template: `
     <aw-wizard [awNavigationMode]="customNavigationMode">
       <aw-wizard-step stepTitle='Steptitle 1'>Step 1</aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 2'>Step 2</aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardStepComponent,
+    WizardComponent
+  ]
 })
 class WizardWithCustomNavigationModeComponent {
 
@@ -48,9 +58,8 @@ describe('NavigationMode', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent, WizardWithCustomNavigationModeComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent, WizardWithCustomNavigationModeComponent]
+}).compileComponents();
   }));
 
   it('can be created with an instance', fakeAsync(() => {

@@ -1,18 +1,25 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ArchwizardModule } from '../archwizard.module';
 import { WizardComponent } from '../components/wizard.component';
+import {WizardStepComponent} from "../components/wizard-step.component";
+import {CompletedStepDirective} from "./completed-step.directive";
 
 @Component({
-  selector: 'aw-test-wizard',
-  template: `
+    selector: 'aw-test-wizard',
+    template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1'>Step 1</aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' awCompletedStep>Step 2</aw-wizard-step>
+      <aw-wizard-step stepTitle='Steptitle 2' [awCompletedStep]>Step 2</aw-wizard-step>
       <!-- Check if the awCompletedStep directive can be used conditionally -->
       <aw-wizard-step stepTitle='Steptitle 3' [awCompletedStep]="false">Step 3</aw-wizard-step>
     </aw-wizard>
-  `
+  `,
+    standalone: true,
+  imports: [
+    WizardComponent,
+    WizardStepComponent,
+    CompletedStepDirective
+  ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
@@ -26,9 +33,8 @@ describe('WizardStep', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WizardTestComponent],
-      imports: [ArchwizardModule]
-    }).compileComponents();
+    imports: [WizardTestComponent]
+}).compileComponents();
   }));
 
   beforeEach(fakeAsync(() => {
