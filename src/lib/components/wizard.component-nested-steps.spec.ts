@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { WizardStep } from '../util/wizard-step.interface';
 import { WizardComponent } from './wizard.component';
@@ -27,6 +27,7 @@ import {WizardStepComponent} from "./wizard-step.component";
       </div>
     </aw-wizard>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         WizardComponent,
         WizardStepComponent

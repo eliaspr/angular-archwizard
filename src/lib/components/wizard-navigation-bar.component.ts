@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { WizardCompletionStep } from '../util/wizard-completion-step.interface';
 import { WizardStep } from '../util/wizard-step.interface';
 import { WizardComponent } from './wizard.component';
@@ -21,6 +21,7 @@ import { GoToStepDirective } from '../directives/go-to-step.directive';
 @Component({
     selector: 'aw-wizard-navigation-bar',
     templateUrl: 'wizard-navigation-bar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
     GoToStepDirective,
     NgTemplateOutlet,

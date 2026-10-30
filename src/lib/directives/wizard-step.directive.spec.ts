@@ -1,4 +1,4 @@
-import { Component, forwardRef, Host, ViewChild } from '@angular/core';
+import { Component, forwardRef, Host, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { WizardComponent } from '../components/wizard.component';
@@ -11,6 +11,7 @@ import {OptionalStepDirective} from "./optional-step.directive";
     template: `
     Step 2
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: []
 })
 class WizardStepTestComponent {
@@ -35,6 +36,7 @@ class WizardStepTestComponent {
       </div>
     </aw-wizard>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         WizardComponent,
         WizardStepDirective,

@@ -6,6 +6,7 @@ import {
   Input,
   QueryList,
   EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {NavigationMode} from '../navigation/navigation-mode.interface';
 import {WizardStep} from '../util/wizard-step.interface';
@@ -51,6 +52,7 @@ import { WizardNavigationBarComponent } from './wizard-navigation-bar.component'
 @Component({
     selector: 'aw-wizard',
     templateUrl: 'wizard.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
     WizardNavigationBarComponent
 ]

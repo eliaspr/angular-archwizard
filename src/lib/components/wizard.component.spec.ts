@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { checkClasses } from '../util/test-utils';
@@ -28,6 +28,7 @@ import {NavigationModeDirective} from "../directives/navigation-mode.directive";
       }
     </aw-wizard>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         WizardComponent,
         WizardStepComponent,

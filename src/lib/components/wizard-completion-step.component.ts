@@ -1,4 +1,4 @@
-import {Component, forwardRef} from '@angular/core';
+import {Component, forwardRef, ChangeDetectionStrategy} from '@angular/core';
 import {WizardCompletionStep} from '../util/wizard-completion-step.interface';
 import {WizardStep} from '../util/wizard-step.interface';
 
@@ -45,6 +45,7 @@ import {WizardStep} from '../util/wizard-step.interface';
         { provide: WizardStep, useExisting: forwardRef(() => WizardCompletionStepComponent) },
         { provide: WizardCompletionStep, useExisting: forwardRef(() => WizardCompletionStepComponent) }
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true
 })
 export class WizardCompletionStepComponent extends WizardCompletionStep {

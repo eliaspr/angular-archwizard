@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { WizardComponent } from '../components/wizard.component';
 import { BaseNavigationMode } from './base-navigation-mode.interface';
@@ -19,6 +19,7 @@ class CustomNavigationMode extends BaseNavigationMode {
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         WizardComponent,
         WizardStepComponent
@@ -39,6 +40,7 @@ class WizardTestComponent {
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         WizardStepComponent,
         WizardComponent

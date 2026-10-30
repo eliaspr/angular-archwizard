@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MovingDirection } from '../util/moving-direction.enum';
@@ -23,6 +23,7 @@ import {OptionalStepDirective} from "../directives/optional-step.directive";
       </aw-wizard-completion-step>
     </aw-wizard>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         WizardComponent,
         WizardStepComponent,

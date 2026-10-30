@@ -1,4 +1,4 @@
-import {Component, forwardRef} from '@angular/core';
+import {Component, forwardRef, ChangeDetectionStrategy} from '@angular/core';
 import {WizardStep} from '../util/wizard-step.interface';
 
 /**
@@ -61,6 +61,7 @@ import {WizardStep} from '../util/wizard-step.interface';
     providers: [
         { provide: WizardStep, useExisting: forwardRef(() => WizardStepComponent) }
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true
 })
 export class WizardStepComponent extends WizardStep {
