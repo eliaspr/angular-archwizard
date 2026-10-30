@@ -16,29 +16,26 @@ export function checkWizardState(
   completedStepIndexes: number[],
   wizardCompleted: boolean,
 ): void {
-  expect(wizard.currentStepIndex).toBe(selectedStepIndex, `expected current step index to be ${selectedStepIndex}`);
+  expect(wizard.currentStepIndex).toBe(selectedStepIndex); // `expected current step index to be ${selectedStepIndex}`
 
   wizard.wizardSteps.forEach((step, index) => {
     // Only the selected step should be selected
-    expect(step.selected).toBe(index === selectedStepIndex, `expected only step ${index} to be selected`);
+    expect(step.selected).toBe(index === selectedStepIndex); // `expected only step ${index} to be selected`
 
     // Check completed step indexes
-    expect(step.completed).toBe(completedStepIndexes.includes(index),
-      `expected step ${index} ${completedStepIndexes.includes(index) ? 'to be completed' : 'not to be completed'}`);
+    expect(step.completed).toBe(completedStepIndexes.includes(index)); // `expected step ${index} ${completedStepIndexes.includes(index) ? 'to be completed' : 'not to be completed'}`
 
     // Check step "editing" state.  It is only applicable to the selected step.
     const expectation = index === selectedStepIndex && selectedStepEditing ? 'to be in editing state' : 'not to be in editing state';
-    expect(step.editing).toBe(index === selectedStepIndex && selectedStepEditing, `expected step ${index} ${expectation}`);
+    expect(step.editing).toBe(index === selectedStepIndex && selectedStepEditing); // `expected step ${index} ${expectation}`
   });
 
   // A step in "editing" state should also be completed
   if (selectedStepEditing) {
-    expect(completedStepIndexes).toContain(selectedStepIndex,
-      `expected step ${selectedStepIndex} to be completed, as follows from its assumed editing state`);
+    expect(completedStepIndexes).toContain(selectedStepIndex); // `expected step ${selectedStepIndex} to be completed, as follows from its assumed editing state`
   }
 
-  expect(wizard.completed).toBe(wizardCompleted,
-    `expected wizard ${wizardCompleted ? 'to be completed' : 'not to be completed'}`);
+  expect(wizard.completed).toBe(wizardCompleted); // `expected wizard ${wizardCompleted ? 'to be completed' : 'not to be completed'}`
 }
 
 
@@ -54,15 +51,14 @@ export function checkWizardNavigableSteps(
   selectedStepIndex: number,
   navigableStepIndexes: number[],
 ): void {
-  expect(wizard.currentStepIndex).toBe(selectedStepIndex, `expected current step index to be ${selectedStepIndex}`);
+  expect(wizard.currentStepIndex).toBe(selectedStepIndex); // `expected current step index to be ${selectedStepIndex}`
 
   wizard.wizardSteps.forEach((step, index) => {
     // Only the selected step should be selected
-    expect(step.selected).toBe(index === selectedStepIndex, `expected only step ${index} to be selected`);
+    expect(step.selected).toBe(index === selectedStepIndex); // `expected only step ${index} to be selected`
 
     // Check navigable step indexes
-    expect(wizard.isNavigable(index)).toBe(navigableStepIndexes.includes(index),
-      `expected step ${index} ${navigableStepIndexes.includes(index) ? 'to be navigable' : 'not to be navigable'}`);
+    expect(wizard.isNavigable(index)).toBe(navigableStepIndexes.includes(index)); // `expected step ${index} ${navigableStepIndexes.includes(index) ? 'to be navigable' : 'not to be navigable'}`
   });
 }
 

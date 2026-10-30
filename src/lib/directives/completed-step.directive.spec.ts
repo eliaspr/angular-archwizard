@@ -9,7 +9,7 @@ import {CompletedStepDirective} from "./completed-step.directive";
     template: `
     <aw-wizard>
       <aw-wizard-step stepTitle='Steptitle 1'>Step 1</aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [awCompletedStep]>Step 2</aw-wizard-step>
+      <aw-wizard-step stepTitle='Steptitle 2' [awCompletedStep]="true">Step 2</aw-wizard-step>
       <!-- Check if the awCompletedStep directive can be used conditionally -->
       <aw-wizard-step stepTitle='Steptitle 3' [awCompletedStep]="false">Step 3</aw-wizard-step>
     </aw-wizard>
@@ -23,7 +23,7 @@ import {CompletedStepDirective} from "./completed-step.directive";
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('WizardStep', () => {

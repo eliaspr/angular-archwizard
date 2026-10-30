@@ -47,7 +47,7 @@ class WizardTestComponent {
   public showStep3 = true;
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('WizardComponent', () => {
@@ -344,18 +344,20 @@ function checkWizardSteps(steps: WizardStep[], selectedStepIndex: number) {
   steps.forEach((step, index) => {
     // Only the selected step should be selected
     if (index === selectedStepIndex) {
-      expect(step.selected).toBe(true, `the selected wizard step index ${index} is not selected`);
+      // `the selected wizard step index ${index} is not selected`
+      expect(step.selected).toBe(true);
     } else {
-      expect(step.selected).toBe(false, `the not selected wizard step index ${index} is selected`);
+      // `the not selected wizard step index ${index} is selected`
+      expect(step.selected).toBe(false);
     }
 
     // All steps before the selected step need to be completed
     if (index < selectedStepIndex) {
-      expect(step.completed).toBe(true,
-        `the wizard step ${index} is not completed while the currently selected step index is ${selectedStepIndex}`);
+      //`the wizard step ${index} is not completed while the currently selected step index is ${selectedStepIndex}`
+      expect(step.completed).toBe(true);
     } else if (index > selectedStepIndex) {
-      expect(step.completed).toBe(false,
-        `the wizard step ${index} is completed while the currently selected step index is ${selectedStepIndex}`);
+      // `the wizard step ${index} is completed while the currently selected step index is ${selectedStepIndex}`
+      expect(step.completed).toBe(false);
     }
   });
 }

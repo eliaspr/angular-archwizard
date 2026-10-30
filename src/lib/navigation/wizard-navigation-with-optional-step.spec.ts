@@ -9,7 +9,7 @@ import {OptionalStepDirective} from "../directives/optional-step.directive";
     selector: 'aw-test-wizard',
     template: `
     <aw-wizard>
-      <aw-wizard-step stepTitle='Steptitle 1' [awOptionalStep]>
+      <aw-wizard-step stepTitle='Steptitle 1' [awOptionalStep]="true">
         Step 1
       </aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 2'>
@@ -29,7 +29,7 @@ import {OptionalStepDirective} from "../directives/optional-step.directive";
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('Wizard navigation with optional step', () => {

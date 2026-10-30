@@ -16,8 +16,8 @@ import {OptionalStepDirective} from "./optional-step.directive";
 })
 class WizardStepTestComponent {
   constructor(@Host() private wizardStep: WizardStepDirective, wizard: WizardTestComponent) {
-    wizardStep.stepEnter.emit = direction => wizard.enterInto(direction, 2);
-    wizardStep.stepExit.emit = direction => wizard.exitFrom(direction, 2);
+    wizardStep.stepEnter.emit = direction => wizard.enterInto(direction!, 2);
+    wizardStep.stepExit.emit = direction => wizard.exitFrom(direction!, 2);
   }
 }
 
@@ -28,7 +28,7 @@ class WizardStepTestComponent {
       <div awWizardStep stepTitle='Steptitle 1' (stepEnter)="enterInto($event, 1)" (stepExit)="exitFrom($event, 1)">
         Step 1
       </div>
-      <aw-test-wizard-step awWizardStep stepTitle='Steptitle 2' [awOptionalStep]>
+      <aw-test-wizard-step awWizardStep stepTitle='Steptitle 2' [awOptionalStep]="true">
         Step 2
       </aw-test-wizard-step>
       <div awWizardStep stepTitle='Steptitle 3' (stepEnter)="enterInto($event, 3)" (stepExit)="exitFrom($event, 3)">
@@ -47,10 +47,10 @@ class WizardStepTestComponent {
 class WizardTestComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   @ViewChild(forwardRef(() => WizardStepTestComponent))
-  public wizardStepTestComponent;
+  public wizardStepTestComponent!: WizardStepTestComponent;
 
   public eventLog: Array<string> = [];
 

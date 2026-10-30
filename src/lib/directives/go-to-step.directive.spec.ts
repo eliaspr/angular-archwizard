@@ -22,7 +22,7 @@ import {OptionalStepDirective} from "./optional-step.directive";
           Go to third step
         </button>
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]="true">
         Step 2
         <button type="button" [awGoToStep]="{stepIndex: 2}" (finalize)="finalizeStep(2)">
           Go to third step
@@ -50,7 +50,7 @@ import {OptionalStepDirective} from "./optional-step.directive";
 class WizardTestComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   public goToSecondStep = 1;
 

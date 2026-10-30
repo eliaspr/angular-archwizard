@@ -34,7 +34,7 @@ import {WizardStepComponent} from "../components/wizard-step.component";
 class WizardTestComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   public eventLog: Array<string> = [];
 

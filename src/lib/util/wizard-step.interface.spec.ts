@@ -14,7 +14,7 @@ import {OptionalStepDirective} from "../directives/optional-step.directive";
                       (stepEnter)="enterInto($event, 1)" (stepExit)="exitFrom($event, 1)">
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step #secondStep stepTitle='Steptitle 2' [canExit]="canExit" [canEnter]="canEnter" [awOptionalStep]
+      <aw-wizard-step #secondStep stepTitle='Steptitle 2' [canExit]="canExit" [canEnter]="canEnter" [awOptionalStep]="true"
                       (stepEnter)="enterInto($event, 2)" (stepExit)="exitFrom($event, 2)">
         Step 2
       </aw-wizard-step>
@@ -32,21 +32,21 @@ import {OptionalStepDirective} from "../directives/optional-step.directive";
     ]
 })
 class WizardTestComponent {
-  public canEnter: any = true;
+  public canEnter: ((direction: MovingDirection) => boolean) | ((direction: MovingDirection) => Promise<boolean>) | boolean = true;
 
-  public canExit: any = true;
+  public canExit: ((direction: MovingDirection) => boolean) | ((direction: MovingDirection) => Promise<boolean>) | boolean = true;
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   @ViewChild('firstStep')
-  public firstStep: WizardStep;
+  public firstStep!: WizardStep;
 
   @ViewChild('secondStep')
-  public secondStep: WizardStep;
+  public secondStep!: WizardStep;
 
   @ViewChild('thirdStep')
-  public thirdStep: WizardStep;
+  public thirdStep!: WizardStep;
 
   public eventLog: Array<string> = [];
 
@@ -144,15 +144,15 @@ describe('WizardStep', () => {
   }));
 
   it('should evaluate canEnter throwing an error correctly', fakeAsync(() => {
-    wizardTest.canEnter = 'malformed input';
+    wizardTest.canEnter = 'malformed input' as any;
     tick();
     wizardTestFixture.detectChanges();
 
     wizardTest.secondStep.canEnterStep(MovingDirection.Backwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`Input value 'malformed input' is neither a boolean nor a function`)));
     wizardTest.secondStep.canEnterStep(MovingDirection.Forwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`Input value 'malformed input' is neither a boolean nor a function`)));
 
     wizardTest.canEnter = (direction) => Promise.reject(new Error('malformed input'));
@@ -160,10 +160,10 @@ describe('WizardStep', () => {
     wizardTestFixture.detectChanges();
 
     wizardTest.secondStep.canEnterStep(MovingDirection.Backwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`malformed input`)));
     wizardTest.secondStep.canEnterStep(MovingDirection.Forwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`malformed input`)));
   }));
 
@@ -219,15 +219,15 @@ describe('WizardStep', () => {
   }));
 
   it('should evaluate canExit throwing an error correctly', fakeAsync(() => {
-    wizardTest.canExit = 'malformed input';
+    wizardTest.canExit = 'malformed input' as any;
     tick();
     wizardTestFixture.detectChanges();
 
     wizardTest.secondStep.canExitStep(MovingDirection.Backwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`Input value 'malformed input' is neither a boolean nor a function`)));
     wizardTest.secondStep.canExitStep(MovingDirection.Forwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`Input value 'malformed input' is neither a boolean nor a function`)));
 
     wizardTest.canExit = (direction) => Promise.reject(new Error('malformed input'));
@@ -235,10 +235,10 @@ describe('WizardStep', () => {
     wizardTestFixture.detectChanges();
 
     wizardTest.secondStep.canExitStep(MovingDirection.Backwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`malformed input`)));
     wizardTest.secondStep.canExitStep(MovingDirection.Forwards)
-      .then(result => fail())
+      .then(result => expect.fail())
       .catch(error => expect(error).toEqual(new Error(`malformed input`)));
   }));
 

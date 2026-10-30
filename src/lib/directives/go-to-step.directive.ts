@@ -63,7 +63,7 @@ export class GoToStepDirective {
    */
   // tslint:disable-next-line:no-input-rename
   @Input('awGoToStep')
-  public targetStep: WizardStep | StepOffset | StepIndex | StepId;
+  public targetStep!: WizardStep | StepOffset | StepIndex | StepId;
 
   /**
    * Constructor

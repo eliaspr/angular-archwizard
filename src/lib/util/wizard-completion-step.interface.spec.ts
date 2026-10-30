@@ -14,7 +14,7 @@ import {WizardCompletionStepComponent} from "../components/wizard-completion-ste
       <aw-wizard-step stepTitle='Steptitle 1' (stepEnter)="enterInto($event, 1)" (stepExit)="exitFrom($event, 1)">
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [canExit]="isValid" [awOptionalStep] (stepEnter)="enterInto($event, 2)"
+      <aw-wizard-step stepTitle='Steptitle 2' [canExit]="isValid" [awOptionalStep]="true" (stepEnter)="enterInto($event, 2)"
                       (stepExit)="exitFrom($event, 2)">
         Step 2
       </aw-wizard-step>
@@ -34,7 +34,7 @@ import {WizardCompletionStepComponent} from "../components/wizard-completion-ste
 class WizardTestComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   public isValid: any = true;
 

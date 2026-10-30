@@ -4,9 +4,7 @@
     "outDir": "./out-tsc/spec",
     "declaration": true,
     "declarationMap": true,
-    "types": [
-      "jasmine"
-    ]
+    "types": ["vitest/globals"]
   },
   "files": [
     "src/test.ts"

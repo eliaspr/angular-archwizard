@@ -31,7 +31,7 @@ import {EnableBackLinksDirective} from "../directives/enable-back-links.directiv
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('Wizard navigation with completion step', () => {

@@ -41,7 +41,7 @@ import {WizardCompletionStepComponent} from "../components/wizard-completion-ste
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('WizardStepTitleDirective', () => {

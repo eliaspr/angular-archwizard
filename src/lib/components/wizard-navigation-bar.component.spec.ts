@@ -14,7 +14,7 @@ import {WizardCompletionStepComponent} from "./wizard-completion-step.component"
       <aw-wizard-step stepTitle='Steptitle 1' [stepId]="firstStepId">
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]="true">
         Step 2
       </aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3'>
@@ -37,7 +37,7 @@ class WizardTestComponent {
   public firstStepId = 'step1';
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('WizardNavigationBarComponent', () => {
@@ -347,10 +347,10 @@ describe('WizardNavigationBarComponent', () => {
     wizardTestFixture.detectChanges();
 
     const allLiEls = navBarEl.queryAll(By.css('li'));
-    expect(allLiEls[0].classes['completed']).toBeFalsy('Only completion step should be marked completed');
-    expect(allLiEls[1].classes['completed']).toBeFalsy('Only completion step should be marked completed');
-    expect(allLiEls[2].classes['completed']).toBeFalsy('Only completion step should be marked completed');
-    expect(allLiEls[3].classes['completed']).toBeTruthy('Completion step should be marked completed');
+    expect(allLiEls[0].classes['completed']).toBeFalsy(); // 'Only completion step should be marked completed'
+    expect(allLiEls[1].classes['completed']).toBeFalsy(); // 'Only completion step should be marked completed'
+    expect(allLiEls[2].classes['completed']).toBeFalsy(); // 'Only completion step should be marked completed'
+    expect(allLiEls[3].classes['completed']).toBeTruthy(); // 'Completion step should be marked completed'
   }));
 
   it('should disable navigation through the navigation bar correctly', fakeAsync(() => {
@@ -456,9 +456,9 @@ describe('WizardNavigationBarComponent', () => {
 
     expect(wizard.currentStepIndex).toBe(0);
     // links contain a class that is not clickable (contains "pointer-events: none;")
-    expect(goToFirstStepLinkEl.classes['navigable']).toBeFalsy('First step label is clickable');
-    expect(goToSecondStepLinkEl.classes['navigable']).toBeFalsy('Second step label is clickable');
-    expect(goToThirdStepLinkEl.classes['navigable']).toBeFalsy('Third step label is clickable');
+    expect(goToFirstStepLinkEl.classes['navigable']).toBeFalsy(); // 'First step label is clickable'
+    expect(goToSecondStepLinkEl.classes['navigable']).toBeFalsy(); // 'Second step label is clickable'
+    expect(goToThirdStepLinkEl.classes['navigable']).toBeFalsy(); // 'Third step label is clickable'
   });
 
   it('should use the \"small\" layout when no navigation bar layout is specified', () => {
@@ -546,7 +546,7 @@ describe('WizardNavigationBarComponent', () => {
   });
 
   it('should change the stepId correctly', () => {
-    wizardTest.firstStepId = null;
+    wizardTest.firstStepId = null!;
     wizardTestFixture.detectChanges();
 
     const navigationLiEls = wizardTestFixture.debugElement.queryAll(By.css('aw-wizard-navigation-bar ul li'));

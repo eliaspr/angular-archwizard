@@ -18,27 +18,27 @@ export abstract class WizardStep {
    * Compared to `stepTitle` this property can contain any html content and not only plain text
    */
   @ContentChild(WizardStepTitleDirective)
-  public stepTitleTemplate: WizardStepTitleDirective;
+  public stepTitleTemplate!: WizardStepTitleDirective;
 
   /**
    * A step symbol property that, if defined, overrides `navigationSymbol`.
    * Allows to display arbitrary content as a step symbol instead of plain text.
    */
   @ContentChild(WizardStepSymbolDirective)
-  public stepSymbolTemplate: WizardStepSymbolDirective;
+  public stepSymbolTemplate!: WizardStepSymbolDirective;
 
   /**
    * A step id, unique to the step
    */
   @Input()
-  public stepId: string;
+  public stepId!: string;
 
   /**
    * A step title property, which contains the visible header title of the step.
    * This title is only shown inside the navigation bar, if `stepTitleTemplate` is not defined or null.
    */
   @Input()
-  public stepTitle: string;
+  public stepTitle!: string;
 
   /**
    * A symbol property, which contains an optional symbol for the step inside the navigation bar.

@@ -62,7 +62,7 @@ export class WizardComponent implements AfterContentInit {
    * A QueryList containing all [[WizardStep]]s inside this wizard
    */
   @ContentChildren(WizardStep, { descendants: true })
-  public wizardStepsQueryList: QueryList<WizardStep>;
+  public wizardStepsQueryList!: QueryList<WizardStep>;
 
   /**
    * The location of the navigation bar inside the wizard.
@@ -193,7 +193,7 @@ export class WizardComponent implements AfterContentInit {
     if (this.hasStep(this.currentStepIndex)) {
       return this.wizardSteps[this.currentStepIndex];
     } else {
-      return null;
+      return null!;
     }
   }
 

@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -13,14 +12,14 @@
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2016",
     "module": "es2020",
     "paths": {
       "angular-archwizard": [
-        "dist"
+        "./dist"
       ],
       "angular-archwizard/*": [
-        "dist/*"
+        "./dist/*"
       ]
     }
   },

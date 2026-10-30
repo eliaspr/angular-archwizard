@@ -29,7 +29,7 @@ import {NavigationModeDirective} from "../directives/navigation-mode.directive";
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('Wizard navigation with navigateForward=visited', () => {

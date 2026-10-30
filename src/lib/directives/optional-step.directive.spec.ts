@@ -12,7 +12,7 @@ import {WizardStepComponent} from "../components/wizard-step.component";
       <aw-wizard-step stepTitle='Steptitle 1'>
         Step 1
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]>
+      <aw-wizard-step stepTitle='Steptitle 2' [awOptionalStep]="true">
         Step 2
       </aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3' [awOptionalStep]="false">
@@ -30,7 +30,7 @@ import {WizardStepComponent} from "../components/wizard-step.component";
 class WizardTestComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 describe('OptionalStepDirective', () => {

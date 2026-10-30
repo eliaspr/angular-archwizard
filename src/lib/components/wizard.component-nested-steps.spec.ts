@@ -35,16 +35,16 @@ import {WizardStepComponent} from "./wizard-step.component";
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   @ViewChild('firstStep')
-  public first: WizardStep;
+  public first!: WizardStep;
 
   @ViewChild('secondStep')
-  public second: WizardStep;
+  public second!: WizardStep;
 
   @ViewChild('thirdStep')
-  public third: WizardStep;
+  public third!: WizardStep;
 }
 
 describe('WizardComponent with nested steps', () => {

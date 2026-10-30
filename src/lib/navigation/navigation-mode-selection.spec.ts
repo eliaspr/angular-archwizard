@@ -3,6 +3,7 @@ import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { WizardComponent } from '../components/wizard.component';
 import { BaseNavigationMode } from './base-navigation-mode.interface';
 import {WizardStepComponent} from "../components/wizard-step.component";
+import {NavigationModeDirective} from "../directives/navigation-mode.directive";
 
 class CustomNavigationMode extends BaseNavigationMode {
   public isNavigable(wizard: WizardComponent, destinationIndex: number): boolean {
@@ -28,28 +29,29 @@ class CustomNavigationMode extends BaseNavigationMode {
 class WizardTestComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 }
 
 @Component({
     selector: 'aw-wizard-with-custom-nav-mode',
     template: `
-    <aw-wizard [awNavigationMode]="customNavigationMode">
+    <aw-wizard [awNavigationMode]="$any(customNavigationMode)">
       <aw-wizard-step stepTitle='Steptitle 1'>Step 1</aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 2'>Step 2</aw-wizard-step>
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
   `,
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [
-        WizardStepComponent,
-        WizardComponent
-    ]
+  imports: [
+    WizardStepComponent,
+    WizardComponent,
+    NavigationModeDirective
+  ]
 })
 class WizardWithCustomNavigationModeComponent {
 
   @ViewChild(WizardComponent)
-  public wizard: WizardComponent;
+  public wizard!: WizardComponent;
 
   public customNavigationMode: CustomNavigationMode = new CustomNavigationMode();
 }
@@ -72,7 +74,7 @@ describe('NavigationMode', () => {
     tick();
     wizardTestFixture.detectChanges();
 
-    expect(wizard.navigation).toEqual(jasmine.any(CustomNavigationMode));
+    expect(wizard.navigation).toBe(CustomNavigationMode);
   }));
 
   it('can be assigned with .navigation setter', fakeAsync(() => {
