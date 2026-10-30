@@ -14,9 +14,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build-js && npm run extract-scss-variables && npm run build-css",
+    "build": "npm run build-js && npm run build-css",
     "build-js": "ng build",
-    "extract-scss-variables": "extract-scss-variables ./dist/styles/archwizard.scss ./dist/styles/variables.scss",
     "build-css": "sass ./dist/styles/archwizard.scss ./dist/styles/archwizard.css",
     "test": "ng test && ng test --tsConfig=tsconfig-noIvy.spec.json",
     "coverage": "ng test --no-watch --code-coverage",
@@ -35,7 +34,6 @@
     "@angular/platform-browser": "~22.2.4",
     "@angular/platform-browser-dynamic": "~22.2.4",
     "@angular/router": "~22.2.4",
-    "@earshinov/extract-scss-variables": "~0.1.1",
     "@types/node": "~26.6.6",
     "codelyzer": "~6.0.2",
     "istanbul-lib-instrument": "^6.0.3",
