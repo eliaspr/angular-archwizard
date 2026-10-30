@@ -1,6 +1,6 @@
 {
   "name": "angular-archwizard",
-  "version": "22.0.0",
+  "version": "22.0.2",
   "license": "MIT",
   "description": "An Angular 9+ module containing a wizard component and its supporting components and directives",
   "author": {

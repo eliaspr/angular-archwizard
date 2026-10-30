@@ -1,7 +1,7 @@
 import {EventEmitter} from '@angular/core';
 import {MovingDirection} from '../util/moving-direction.enum';
 import {NavigationMode} from './navigation-mode.interface';
-import {WizardComponent} from '../components/wizard.component';
+import { IWizardComponent } from '../components/wizard.interface';
 
 /**
  * Base implementation of [[NavigationMode]]
@@ -30,7 +30,7 @@ export abstract class BaseNavigationMode implements NavigationMode {
    * @param destinationIndex The index of the destination step
    * @returns A [[Promise]] containing `true`, if the destination step can be transitioned to and `false` otherwise
    */
-  public canGoToStep(wizard: WizardComponent, destinationIndex: number): Promise<boolean> {
+  public canGoToStep(wizard: IWizardComponent, destinationIndex: number): Promise<boolean> {
     const hasStep = wizard.hasStep(destinationIndex);
 
     const movingDirection = wizard.getMovingDirection(destinationIndex);
@@ -67,7 +67,7 @@ export abstract class BaseNavigationMode implements NavigationMode {
    * @param destinationIndex The index of the destination step
    * @returns `true`, if the destination step can be transitioned to and `false` otherwise
    */
-  protected canTransitionToStep(wizard: WizardComponent, destinationIndex: number): boolean {
+  protected canTransitionToStep(wizard: IWizardComponent, destinationIndex: number): boolean {
     return this.isNavigable(wizard, destinationIndex);
   }
 
@@ -90,7 +90,7 @@ export abstract class BaseNavigationMode implements NavigationMode {
    * @param postFinalize An event emitter, to be called after the step has been transitioned
    */
   public goToStep(
-    wizard: WizardComponent,
+    wizard: IWizardComponent,
     destinationIndex: number,
     preFinalize?: EventEmitter<void>,
     postFinalize?: EventEmitter<void>): void {
@@ -143,14 +143,14 @@ export abstract class BaseNavigationMode implements NavigationMode {
    * @param wizard The wizard component to operate on
    * @param destinationIndex The index of the destination wizard step
    */
-  protected transition(wizard: WizardComponent, destinationIndex: number): void {
+  protected transition(wizard: IWizardComponent, destinationIndex: number): void {
     wizard.currentStepIndex = destinationIndex;
   }
 
   /**
    * @inheritDoc
    */
-  public abstract isNavigable(WizardComponent: WizardComponent, destinationIndex: number): boolean;
+  public abstract isNavigable(WizardComponent: IWizardComponent, destinationIndex: number): boolean;
 
   /**
    * Resets the state of this wizard.
@@ -160,7 +160,7 @@ export abstract class BaseNavigationMode implements NavigationMode {
    *
    * @param wizard The wizard component to operate on
    */
-  public reset(wizard: WizardComponent): void {
+  public reset(wizard: IWizardComponent): void {
     this.ensureCanReset(wizard);
 
     // reset the step internal state
@@ -186,7 +186,7 @@ export abstract class BaseNavigationMode implements NavigationMode {
    * @param wizard The wizard component to operate on
    * @throws An `Error` is thrown, if a micconfiguration issue is discovered.
    */
-  protected ensureCanReset(wizard: WizardComponent): void {
+  protected ensureCanReset(wizard: IWizardComponent): void {
     // the wizard doesn't contain a step with the default step index
     if (!wizard.hasStep(wizard.defaultStepIndex)) {
       throw new Error(`The wizard doesn't contain a step with index ${wizard.defaultStepIndex}`);

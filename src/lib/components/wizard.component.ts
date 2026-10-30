@@ -13,6 +13,7 @@ import {WizardStep} from '../util/wizard-step.interface';
 import {MovingDirection} from '../util/moving-direction.enum';
 import {ConfigurableNavigationMode} from '../navigation/configurable-navigation-mode';
 import { WizardNavigationBarComponent } from './wizard-navigation-bar.component';
+import {IWizardComponent} from "./wizard.interface";
 
 /**
  * The `aw-wizard` component defines the root component of a wizard.
@@ -57,7 +58,7 @@ import { WizardNavigationBarComponent } from './wizard-navigation-bar.component'
     WizardNavigationBarComponent
 ]
 })
-export class WizardComponent implements AfterContentInit {
+export class WizardComponent implements AfterContentInit, IWizardComponent {
   /**
    * A QueryList containing all [[WizardStep]]s inside this wizard
    */
@@ -103,6 +104,9 @@ export class WizardComponent implements AfterContentInit {
       return this._defaultStepIndex;
     }
   }
+
+  protected thisWizard() : WizardComponent { return this;}
+
   public set defaultStepIndex(defaultStepIndex: number) {
     this._defaultStepIndex = defaultStepIndex;
   }

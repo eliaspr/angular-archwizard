@@ -8,7 +8,7 @@
         'completed': isCompleted(step),
         'navigable': isNavigable(step)
   }">
-      <a [awGoToStep]="step">
+      <a [awGoToStep]="step" [wizard]="wizard()">
         <div class="label">
           @if (step.stepTitleTemplate) {
             <ng-container [ngTemplateOutlet]="step.stepTitleTemplate.templateRef"

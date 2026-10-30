@@ -1,5 +1,6 @@
 @if (navBarLocation == 'top' || navBarLocation == 'left') {
   <aw-wizard-navigation-bar
+    [wizard]="thisWizard()"
   [class]="{
     'vertical': navBarLocation == 'left',
     'horizontal': navBarLocation == 'top',
@@ -22,6 +23,7 @@
 
 @if (navBarLocation == 'bottom' || navBarLocation == 'right') {
   <aw-wizard-navigation-bar
+    [wizard]="thisWizard()"
   [class]="{
     'vertical': navBarLocation == 'right',
     'horizontal': navBarLocation == 'bottom',

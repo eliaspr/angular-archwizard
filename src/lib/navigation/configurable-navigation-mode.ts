@@ -1,5 +1,5 @@
 import {BaseNavigationMode} from './base-navigation-mode.interface';
-import {WizardComponent} from '../components/wizard.component';
+import { IWizardComponent } from '../components/wizard.interface';
 import {WizardCompletionStep} from '../util/wizard-completion-step.interface';
 
 /**
@@ -42,7 +42,7 @@ export class ConfigurableNavigationMode extends BaseNavigationMode {
   /**
    * @inheritDoc
    */
-  protected canTransitionToStep(wizard: WizardComponent, destinationIndex: number): boolean {
+  protected canTransitionToStep(wizard: IWizardComponent, destinationIndex: number): boolean {
     // if the destination step can be navigated to using the navigation bar,
     // it should be accessible with [goToStep] as well
     if (this.isNavigable(wizard, destinationIndex)) {
@@ -59,7 +59,7 @@ export class ConfigurableNavigationMode extends BaseNavigationMode {
   /**
    * @inheritDoc
    */
-  protected transition(wizard: WizardComponent, destinationIndex: number): void {
+  protected transition(wizard: IWizardComponent, destinationIndex: number): void {
     if (this.navigateForward === 'deny') {
       // set all steps after the destination step to incomplete
       wizard.wizardSteps
@@ -73,7 +73,7 @@ export class ConfigurableNavigationMode extends BaseNavigationMode {
   /**
    * @inheritDoc
    */
-  public isNavigable(wizard: WizardComponent, destinationIndex: number): boolean {
+  public isNavigable(wizard: IWizardComponent, destinationIndex: number): boolean {
     // Check if the destination step can be navigated to
     const destinationStep = wizard.getStepAtIndex(destinationIndex);
     if (destinationStep instanceof WizardCompletionStep) {
@@ -113,7 +113,7 @@ export class ConfigurableNavigationMode extends BaseNavigationMode {
   /**
    * @inheritDoc
    */
-  protected ensureCanReset(wizard: WizardComponent): void {
+  protected ensureCanReset(wizard: IWizardComponent): void {
     super.ensureCanReset(wizard);
 
     // the default step is a completion step and the wizard contains more than one step

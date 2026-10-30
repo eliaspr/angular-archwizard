@@ -1,7 +1,7 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy, input} from '@angular/core';
 import { WizardCompletionStep } from '../util/wizard-completion-step.interface';
 import { WizardStep } from '../util/wizard-step.interface';
-import { WizardComponent } from './wizard.component';
+import { IWizardComponent } from './wizard.interface';
 import { NgTemplateOutlet, NgStyle } from '@angular/common';
 import { GoToStepDirective } from '../directives/go-to-step.directive';
 
@@ -29,13 +29,9 @@ import { GoToStepDirective } from '../directives/go-to-step.directive';
 ]
 })
 export class WizardNavigationBarComponent {
-  /**
-   * Constructor
-   *
-   * @param wizard The state the wizard currently resides in
-   */
-  constructor(public wizard: WizardComponent) {
-  }
+  //  Having an input with interface (as opposed to ctor injection of WizardComponent implementation) is needed to prevent circular dependency.
+  public wizard = input.required<IWizardComponent>();
+
 
   /**
    * Returns all [[WizardStep]]s contained in the wizard
@@ -43,12 +39,12 @@ export class WizardNavigationBarComponent {
    * @returns An array containing all [[WizardStep]]s
    */
   get wizardSteps(): Array<WizardStep> {
-    switch (this.wizard.navBarDirection) {
+    switch (this.wizard().navBarDirection) {
       case 'right-to-left':
-        return this.wizard.wizardSteps.slice().reverse();
+        return this.wizard().wizardSteps.slice().reverse();
       case 'left-to-right':
       default:
-        return this.wizard.wizardSteps;
+        return this.wizard().wizardSteps;
     }
   }
 
@@ -58,7 +54,7 @@ export class WizardNavigationBarComponent {
    * @returns The number of wizard steps to be displayed
    */
   get numberOfWizardSteps(): number {
-    return this.wizard.wizardSteps.length;
+    return this.wizard().wizardSteps.length;
   }
 
   /**
@@ -110,7 +106,7 @@ export class WizardNavigationBarComponent {
    * @returns True if the step can be marked as `completed`
    */
   public isCompleted(wizardStep: WizardStep): boolean {
-    return wizardStep instanceof WizardCompletionStep && this.wizard.completed;
+    return wizardStep instanceof WizardCompletionStep && this.wizard().completed;
   }
 
   /**
@@ -124,7 +120,7 @@ export class WizardNavigationBarComponent {
    * @returns True if the step can be marked as navigable
    */
   public isNavigable(wizardStep: WizardStep): boolean {
-    return !wizardStep.selected && !this.wizard.disableNavigationBar &&
-      this.wizard.isNavigable(this.wizard.getIndexOfStep(wizardStep));
+    return !wizardStep.selected && !this.wizard().disableNavigationBar &&
+      this.wizard().isNavigable(this.wizard().getIndexOfStep(wizardStep));
   }
 }
