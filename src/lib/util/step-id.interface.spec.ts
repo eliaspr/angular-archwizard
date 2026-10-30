@@ -31,13 +31,12 @@ import {OptionalStepDirective} from "../directives/optional-step.directive";
       </aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent,
-    GoToStepDirective,
-    OptionalStepDirective
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent,
+        GoToStepDirective,
+        OptionalStepDirective
+    ]
 })
 class WizardTestComponent {
 

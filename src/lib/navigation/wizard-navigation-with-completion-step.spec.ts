@@ -21,13 +21,12 @@ import {EnableBackLinksDirective} from "../directives/enable-back-links.directiv
       </aw-wizard-completion-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent,
-    WizardCompletionStepComponent,
-    EnableBackLinksDirective
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent,
+        WizardCompletionStepComponent,
+        EnableBackLinksDirective
+    ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)

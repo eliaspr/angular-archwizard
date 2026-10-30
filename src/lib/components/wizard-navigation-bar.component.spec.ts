@@ -25,13 +25,12 @@ import {WizardCompletionStepComponent} from "./wizard-completion-step.component"
       </aw-wizard-completion-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardStepComponent,
-    WizardComponent,
-    OptionalStepDirective,
-    WizardCompletionStepComponent
-  ]
+    imports: [
+        WizardStepComponent,
+        WizardComponent,
+        OptionalStepDirective,
+        WizardCompletionStepComponent
+    ]
 })
 class WizardTestComponent {
   public firstStepId = 'step1';

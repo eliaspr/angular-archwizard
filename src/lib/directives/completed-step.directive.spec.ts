@@ -14,12 +14,11 @@ import {CompletedStepDirective} from "./completed-step.directive";
       <aw-wizard-step stepTitle='Steptitle 3' [awCompletedStep]="false">Step 3</aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent,
-    CompletedStepDirective
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent,
+        CompletedStepDirective
+    ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)

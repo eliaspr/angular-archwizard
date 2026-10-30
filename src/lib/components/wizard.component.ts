@@ -52,12 +52,11 @@ import { WizardNavigationBarComponent } from './wizard-navigation-bar.component'
 @Component({
     selector: 'aw-wizard',
     templateUrl: 'wizard.component.html',
-    standalone: true,
     imports: [
         NgIf,
         WizardNavigationBarComponent,
         NgClass,
-    ],
+    ]
 })
 export class WizardComponent implements AfterContentInit {
   /**

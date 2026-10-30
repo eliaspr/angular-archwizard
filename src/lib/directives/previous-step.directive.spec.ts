@@ -26,12 +26,11 @@ import {WizardStepComponent} from "../components/wizard-step.component";
       </aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent,
-    PreviousStepDirective
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent,
+        PreviousStepDirective
+    ]
 })
 class WizardTestComponent {
 

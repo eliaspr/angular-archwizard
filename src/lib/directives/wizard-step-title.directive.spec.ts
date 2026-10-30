@@ -31,13 +31,12 @@ import {WizardCompletionStepComponent} from "../components/wizard-completion-ste
       </aw-wizard-completion-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent,
-    WizardStepTitleDirective,
-    WizardCompletionStepComponent
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent,
+        WizardStepTitleDirective,
+        WizardCompletionStepComponent
+    ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)

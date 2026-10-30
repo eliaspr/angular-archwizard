@@ -21,7 +21,6 @@ import { GoToStepDirective } from '../directives/go-to-step.directive';
 @Component({
     selector: 'aw-wizard-navigation-bar',
     templateUrl: 'wizard-navigation-bar.component.html',
-    standalone: true,
     imports: [
         NgFor,
         NgClass,
@@ -29,7 +28,7 @@ import { GoToStepDirective } from '../directives/go-to-step.directive';
         NgIf,
         NgTemplateOutlet,
         NgStyle,
-    ],
+    ]
 })
 export class WizardNavigationBarComponent {
   /**

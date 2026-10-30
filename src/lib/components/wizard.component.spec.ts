@@ -24,12 +24,11 @@ import {NavigationModeDirective} from "../directives/navigation-mode.directive";
       </aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent,
-    NavigationModeDirective
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent,
+        NavigationModeDirective
+    ]
 })
 class WizardTestComponent {
   public navigateForward: 'deny' | 'allow' = 'deny';

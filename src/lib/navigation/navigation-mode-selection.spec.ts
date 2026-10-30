@@ -19,11 +19,10 @@ class CustomNavigationMode extends BaseNavigationMode {
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent
+    ]
 })
 class WizardTestComponent {
 
@@ -40,11 +39,10 @@ class WizardTestComponent {
       <aw-wizard-step stepTitle='Steptitle 3'>Step 3</aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardStepComponent,
-    WizardComponent
-  ]
+    imports: [
+        WizardStepComponent,
+        WizardComponent
+    ]
 })
 class WizardWithCustomNavigationModeComponent {
 

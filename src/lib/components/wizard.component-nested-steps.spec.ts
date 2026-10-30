@@ -27,11 +27,10 @@ import {WizardStepComponent} from "./wizard-step.component";
       </div>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepComponent
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepComponent
+    ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)

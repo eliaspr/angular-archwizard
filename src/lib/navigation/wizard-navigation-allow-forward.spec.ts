@@ -20,12 +20,11 @@ import {WizardStepComponent} from "../components/wizard-step.component";
       </aw-wizard-step>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    NavigationModeDirective,
-    WizardComponent,
-    WizardStepComponent
-  ]
+    imports: [
+        NavigationModeDirective,
+        WizardComponent,
+        WizardStepComponent
+    ]
 })
 class WizardTestComponent {
   @ViewChild(WizardComponent)

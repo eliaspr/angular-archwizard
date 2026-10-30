@@ -7,12 +7,11 @@ import { WizardStepDirective } from './wizard-step.directive';
 import {OptionalStepDirective} from "./optional-step.directive";
 
 @Component({
-  selector: 'aw-test-wizard-step',
-  template: `
+    selector: 'aw-test-wizard-step',
+    template: `
     Step 2
   `,
-  standalone: true,
-  imports: []
+    imports: []
 })
 class WizardStepTestComponent {
   constructor(@Host() private wizardStep: WizardStepDirective, wizard: WizardTestComponent) {
@@ -36,13 +35,12 @@ class WizardStepTestComponent {
       </div>
     </aw-wizard>
   `,
-    standalone: true,
-  imports: [
-    WizardComponent,
-    WizardStepDirective,
-    OptionalStepDirective,
-    WizardStepTestComponent
-  ]
+    imports: [
+        WizardComponent,
+        WizardStepDirective,
+        OptionalStepDirective,
+        WizardStepTestComponent
+    ]
 })
 class WizardTestComponent {
 
