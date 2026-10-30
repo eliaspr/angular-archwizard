@@ -13,17 +13,21 @@ import {NavigationModeDirective} from "../directives/navigation-mode.directive";
     <aw-wizard
       [disableNavigationBar]="disableNavigationBar" [defaultStepIndex]="defaultStepIndex"
       [awNavigationMode]="null" [navigateForward]="navigateForward" [navigateBackward]="navigateBackward">
-      <aw-wizard-step stepTitle='Steptitle 1' *ngIf="showStep1">
-        Step 1
-      </aw-wizard-step>
+      @if (showStep1) {
+        <aw-wizard-step stepTitle='Steptitle 1'>
+          Step 1
+        </aw-wizard-step>
+      }
       <aw-wizard-step stepTitle='Steptitle 2'>
         Step 2
       </aw-wizard-step>
-      <aw-wizard-step stepTitle='Steptitle 3' *ngIf="showStep3">
-        Step 3
-      </aw-wizard-step>
+      @if (showStep3) {
+        <aw-wizard-step stepTitle='Steptitle 3'>
+          Step 3
+        </aw-wizard-step>
+      }
     </aw-wizard>
-  `,
+    `,
     imports: [
         WizardComponent,
         WizardStepComponent,

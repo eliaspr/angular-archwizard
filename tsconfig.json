@@ -11,7 +11,7 @@
     "declaration": false,
     "declarationMap": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
